@@ -1,0 +1,52 @@
+{
+  "name": "@joshuaavalon/fastify-plugin-prisma",
+  "version": "1.0.2",
+  "description": "Prisma plugin for fastify",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc",
+    "test": "mocha",
+    "db:generate": "prisma generate --no-hints",
+    "db:deploy": "prisma migrate deploy",
+    "db:dev": "prisma migrate dev --name temp"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "homepage": "https://github.com/joshuaavalon/fastify-plugins#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshuaavalon/fastify-plugins.git",
+    "directory": "packages/prisma"
+  },
+  "bugs": {
+    "url": "https://github.com/joshuaavalon/fastify-plugins/issues"
+  },
+  "keywords": [
+    "fastify",
+    "fastify-plugin",
+    "prisma"
+  ],
+  "files": [
+    "dist",
+    "!dist/**/__tests__/**/*"
+  ],
+  "author": "Joshua Avalon",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "prisma": "^5.18.0"
+  },
+  "peerDependencies": {
+    "@prisma/client": "^5.18.0",
+    "fastify": "^4.23.2"
+  },
+  "dependencies": {
+    "fastify-plugin": "^4.5.1"
+  }
+}
