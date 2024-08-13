@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/joshuaavalon/fastify-plugins/compare/fastify-plugin-storage-v2.0.0...fastify-plugin-storage-v2.1.0) (2024-08-13)
+
+
+### Features
+
+* initial commit ([e6dfc3a](https://github.com/joshuaavalon/fastify-plugins/commit/e6dfc3a61794bfb517a1d921f7ae90c2b19693b2))
+
 ## [2.0.0](https://github.com/joshuaavalon/fastify-plugin-storage/compare/v1.0.0...v2.0.0) (2023-11-20)
 
 

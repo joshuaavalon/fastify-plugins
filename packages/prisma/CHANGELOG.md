@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/joshuaavalon/fastify-plugins/compare/fastify-plugin-prisma-v1.0.2...fastify-plugin-prisma-v1.1.0) (2024-08-13)
+
+
+### Features
+
+* initial commit ([e6dfc3a](https://github.com/joshuaavalon/fastify-plugins/commit/e6dfc3a61794bfb517a1d921f7ae90c2b19693b2))
+
 ## [1.0.2](https://github.com/joshuaavalon/fastify-plugin-prisma/compare/v1.0.1...v1.0.2) (2023-10-04)
 
 
