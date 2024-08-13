@@ -5,6 +5,7 @@ on:
       - master
 jobs:
   release-please:
+    name: release-please
     runs-on: ubuntu-latest
     permissions:
       contents: write
