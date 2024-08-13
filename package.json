@@ -7,6 +7,7 @@
   "scripts": {
     "build": "npm run --workspaces --if-present build",
     "test": "npm run --workspaces --if-present test",
+    "lint": "eslint",
     "db:generate": "npm run --workspaces --if-present db:generate",
     "db:deploy": "npm run --workspaces --if-present db:deploy",
     "db:dev": "npm run --workspaces --if-present db:dev"
