@@ -7,30 +7,43 @@ jobs:
   release-please:
     name: release-please
     runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      outputs: ${{ steps.release.outputs }}
     permissions:
       contents: write
       pull-requests: write
-      id-token: write
     steps:
       - uses: googleapis/release-please-action@v4
         id: release
-        with:
-          token: ${{ secrets.GH_PAT }}
-      - uses: actions/checkout@v4
-        if: ${{ steps.release.outputs.release_created }}
-      - uses: actions/setup-node@v4
+  publish:
+    name: publish
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package:
+          - name: "@joshuaavalon/fastify-plugin-storage"
+            path: packages/storage
+          - name: "@joshuaavalon/fastify-plugin-prisma"
+            path: packages/prisma
+    if: ${{ needs.release-please.outputs.release_created }}
+    needs:
+      - release-please
+    permissions:
+      id-token: write
+    steps:
+      - if: ${{ needs.release-please.outputs.outputs[format('{0}--release_created', matrix.package.path)] }}
+        uses: actions/checkout@v4
+      - if: ${{ needs.release-please.outputs.outputs[format('{0}--release_created', matrix.package.path)] }}
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-        if: ${{ steps.release.outputs.release_created }}
-      - run: npm ci
-        if: ${{ steps.release.outputs.release_created }}
-      - run: npm run build
-        if: ${{ steps.release.outputs.release_created }}
-      - run: npm publish --workspace @joshuaavalon/fastify-plugin-prisma --provenance --access public
+      - if: ${{ needs.release-please.outputs.outputs[format('{0}--release_created', matrix.package.path)] }}
+        run: npm ci
+      - if: ${{ needs.release-please.outputs.outputs[format('{0}--release_created', matrix.package.path)] }}
+        run: npm run build
+      - if: ${{ needs.release-please.outputs.outputs[format('{0}--release_created', matrix.package.path)] }}
+        run: npm publish --workspace ${PACKAGE_NAME} --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        if: ${{ steps.release.outputs['packages/prisma--release_created'] }}
-      - run: npm publish --workspace @joshuaavalon/fastify-plugin-storage --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        if: ${{ steps.release.outputs['packages/storage--release_created'] }}
+          PACKAGE_NAME: ${{ matrix.package.name }}
