@@ -8,30 +8,30 @@ jobs:
     name: release-please
     runs-on: ubuntu-latest
     outputs:
-      release-created: ${{ steps.release.outputs.release_created }}
       release-prisma: ${{ steps.release.outputs['packages/prisma--release_created'] }}
       release-storage: ${{ steps.release.outputs['packages/storage--release_created'] }}
     permissions:
       contents: write
       pull-requests: write
     steps:
-      - uses: googleapis/release-please-action@v4
-        id: release
+      - id: release
+        uses: googleapis/release-please-action@v4
   release-packages:
-    name: publish
-    runs-on: ubuntu-latest
-    if: ${{ needs.release-please.outputs.release-created }}
+    name: release-packages
     needs:
       - release-please
+    permissions:
+      id-token: write
     strategy:
       matrix:
         package:
           - name: "@joshuaavalon/fastify-plugin-prisma"
-            is-release: ${{ needs.release-please.outputs.release-prisma }}
+            is-release: ${{ needs.release-please.outputs.release-prisma || false }}
           - name: "@joshuaavalon/fastify-plugin-storage"
-            is-release: ${{ needs.release-please.outputs.release-storage }}
-    steps:
-      - uses: ./.github/workflows/publish.yml
-        with:
-          package-name: ${{ matrix.package.name }}
-          is-release: ${{ matrix.package.is-release }}
+            is-release: ${{ needs.release-please.outputs.release-storage || false }}
+    uses: ./.github/workflows/publish.yml
+    with:
+      package-name: ${{ matrix.package.name }}
+      is-release: ${{ matrix.package.is-release }}
+    secrets:
+      npm-token: ${{ secrets.NPM_TOKEN }}
