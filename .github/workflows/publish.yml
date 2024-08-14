@@ -11,6 +11,9 @@ on:
         description: Flag whether to publish
         type: boolean
         required: true
+    secrets:
+      npm-token:
+        required: true
 
 jobs:
   publish:
@@ -25,8 +28,9 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
+      - run: npm run db:generate
       - run: npm run build
-      - run: npm publish --workspace ${PACKAGE_NAME} --provenance --access public
+      - run: npm publish --workspace ${package-name} --provenance --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          PACKAGE_NAME: ${{ inputs.package-name }}
+          NODE_AUTH_TOKEN: ${{ secrets.npm-token }}
+          package-name: ${{ inputs.package-name }}
