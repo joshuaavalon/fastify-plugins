@@ -3,11 +3,11 @@ name: publish
 on:
   workflow_call:
     inputs:
-      package-name:
+      package_name:
         description: Package name
         type: string
         required: true
-      is-release:
+      is_release:
         description: Flag whether to publish
         type: boolean
         required: true
@@ -16,7 +16,7 @@ jobs:
   publish:
     name: publish
     runs-on: ubuntu-latest
-    if: ${{ inputs.is-release }}
+    if: ${{ inputs.is_release }}
     permissions:
       id-token: write
     steps:
@@ -29,4 +29,4 @@ jobs:
       - run: npm publish --workspace ${PACKAGE_NAME} --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          PACKAGE_NAME: ${{ inputs.package-name }}
+          PACKAGE_NAME: ${{ inputs.package_name }}
