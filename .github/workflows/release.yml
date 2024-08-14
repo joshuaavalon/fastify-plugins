@@ -8,9 +8,9 @@ jobs:
     name: release-please
     runs-on: ubuntu-latest
     outputs:
-      release-created: ${{ steps.release.outputs.release_created }}
-      release-prisma: ${{ steps.release.outputs['packages/prisma--release_created'] }}
-      release-storage: ${{ steps.release.outputs['packages/storage--release_created'] }}
+      release_created: ${{ steps.release.outputs.release_created }}
+      release_prisma: ${{ steps.release.outputs['packages/prisma--release_created'] }}
+      release_storage: ${{ steps.release.outputs['packages/storage--release_created'] }}
     permissions:
       contents: write
       pull-requests: write
@@ -18,20 +18,20 @@ jobs:
       - uses: googleapis/release-please-action@v4
         id: release
   release-packages:
-    name: publish
+    name: release-packages
     runs-on: ubuntu-latest
-    if: ${{ needs.release-please.outputs.release-created }}
+    if: ${{ needs.release-please.outputs.release_created }}
     needs:
       - release-please
     strategy:
       matrix:
         package:
           - name: "@joshuaavalon/fastify-plugin-prisma"
-            is-release: ${{ needs.release-please.outputs.release-prisma }}
+            is_release: ${{ needs.release-please.outputs.release_prisma }}
           - name: "@joshuaavalon/fastify-plugin-storage"
-            is-release: ${{ needs.release-please.outputs.release-storage }}
+            is_release: ${{ needs.release-please.outputs.release_storage }}
     steps:
       - uses: ./.github/workflows/publish.yml
         with:
           package-name: ${{ matrix.package.name }}
-          is-release: ${{ matrix.package.is-release }}
+          is-release: ${{ matrix.package.is_release }}
