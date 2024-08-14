@@ -8,42 +8,30 @@ jobs:
     name: release-please
     runs-on: ubuntu-latest
     outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
-      outputs: ${{ steps.release.outputs }}
+      release-created: ${{ steps.release.outputs.release_created }}
+      release-prisma: ${{ steps.release.outputs['packages/prisma--release_created'] }}
+      release-storage: ${{ steps.release.outputs['packages/storage--release_created'] }}
     permissions:
       contents: write
       pull-requests: write
     steps:
       - uses: googleapis/release-please-action@v4
         id: release
-  publish:
+  release-packages:
     name: publish
     runs-on: ubuntu-latest
+    if: ${{ needs.release-please.outputs.release-created }}
+    needs:
+      - release-please
     strategy:
       matrix:
         package:
-          - name: "@joshuaavalon/fastify-plugin-storage"
-            path: packages/storage
           - name: "@joshuaavalon/fastify-plugin-prisma"
-            path: packages/prisma
-    if: ${{ needs.release-please.outputs.release_created }}
-    needs:
-      - release-please
-    permissions:
-      id-token: write
+            is-release: ${{ needs.release-please.outputs.release-prisma }}
+          - name: "@joshuaavalon/fastify-plugin-storage"
+            is-release: ${{ needs.release-please.outputs.release-storage }}
     steps:
-      - if: ${{ needs.release-please.outputs.outputs[format('{0}--release_created', matrix.package.path)] }}
-        uses: actions/checkout@v4
-      - if: ${{ needs.release-please.outputs.outputs[format('{0}--release_created', matrix.package.path)] }}
-        uses: actions/setup-node@v4
+      - uses: ./.github/workflows/publish.yml
         with:
-          node-version: 20
-      - if: ${{ needs.release-please.outputs.outputs[format('{0}--release_created', matrix.package.path)] }}
-        run: npm ci
-      - if: ${{ needs.release-please.outputs.outputs[format('{0}--release_created', matrix.package.path)] }}
-        run: npm run build
-      - if: ${{ needs.release-please.outputs.outputs[format('{0}--release_created', matrix.package.path)] }}
-        run: npm publish --workspace ${PACKAGE_NAME} --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          PACKAGE_NAME: ${{ matrix.package.name }}
+          package-name: ${{ matrix.package.name }}
+          is-release: ${{ matrix.package.is-release }}

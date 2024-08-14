@@ -1,0 +1,32 @@
+name: publish
+
+on:
+  workflow_call:
+    inputs:
+      package-name:
+        description: Package name
+        type: string
+        required: true
+      is-release:
+        description: Flag whether to publish
+        type: boolean
+        required: true
+
+jobs:
+  publish:
+    name: publish
+    runs-on: ubuntu-latest
+    if: ${{ inputs.is-release }}
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run build
+      - run: npm publish --workspace ${PACKAGE_NAME} --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          PACKAGE_NAME: ${{ inputs.package-name }}
