@@ -26,7 +26,7 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm run build
-      - run: npm publish --workspace ${PACKAGE_NAME} --provenance --access public
+      - run: npm publish --workspace ${package-name} --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          PACKAGE_NAME: ${{ inputs.package-name }}
+          package-name: ${{ inputs.package-name }}
