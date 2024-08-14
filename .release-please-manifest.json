@@ -1,4 +1,4 @@
 {
-  "packages/prisma": "1.0.2",
-  "packages/storage": "2.0.0"
+  "packages/prisma": "1.1.0",
+  "packages/storage": "2.1.0"
 }
