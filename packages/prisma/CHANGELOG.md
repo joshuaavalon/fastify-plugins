@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/joshuaavalon/fastify-plugins/compare/fastify-plugin-prisma-v1.1.0...fastify-plugin-prisma-v1.1.1) (2024-08-16)
+
+
+### Bug Fixes
+
+* release using joshuaavalon/publish-npm ([77e5b56](https://github.com/joshuaavalon/fastify-plugins/commit/77e5b56eaa809b36e5637d946662cd3ec6f3324b))
+
 ## [1.1.0](https://github.com/joshuaavalon/fastify-plugins/compare/fastify-plugin-prisma-v1.0.2...fastify-plugin-prisma-v1.1.0) (2024-08-14)
 
 
