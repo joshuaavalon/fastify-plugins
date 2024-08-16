@@ -28,6 +28,9 @@ jobs:
             is-release: ${{ fromJSON(needs.release-please.outputs.release-prisma) }}
           - name: "@joshuaavalon/fastify-plugin-storage"
             is-release: ${{ fromJSON(needs.release-please.outputs.release-storage) }}
+        exclude:
+          - package:
+              is-release: false
     permissions:
       id-token: write
     steps:
