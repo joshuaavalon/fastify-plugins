@@ -16,8 +16,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-
-          check-latest: true
       - run: npm ci
       - run: npm run lint
   test:
@@ -33,7 +31,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          check-latest: true
       - run: npm ci
       - run: npm run db:generate
       - run: npm run build
