@@ -8,7 +8,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc",
-    "test": "mocha",
+    "test": "set NODE_OPTIONS=--enable-source-maps && mocha",
     "prepublishOnly": "npm run build"
   },
   "exports": {

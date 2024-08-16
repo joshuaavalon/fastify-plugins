@@ -8,7 +8,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc",
-    "test": "mocha",
+    "test": "set NODE_OPTIONS=--enable-source-maps && mocha",
     "prepublishOnly": "npm run db:generate && npm run build",
     "db:generate": "prisma generate --no-hints",
     "db:deploy": "prisma migrate deploy",
