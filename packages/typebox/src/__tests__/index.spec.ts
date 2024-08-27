@@ -16,13 +16,15 @@ describe("Test plugin", () => {
       {
         schema: {
           body: Type.Object({
-            a: Type.Transform(Type.String()).Decode(v => Number.parseInt(v))
+            a: Type.Transform(Type.String())
+              .Decode(v => Number.parseInt(v))
               .Encode(v => v.toString())
           }),
           response: {
             200: Type.Object({
               success: Type.Boolean(),
-              a: Type.Transform(Type.String()).Decode(v => Number.parseInt(v))
+              a: Type.Transform(Type.String())
+                .Decode(v => Number.parseInt(v))
                 .Encode(v => v.toString())
             })
           }

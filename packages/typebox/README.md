@@ -41,15 +41,3 @@ app.post(
   }
 );
 ```
-
-```ts
-import type { StaticDecode, TSchema } from "@sinclair/typebox";
-
-declare module "fastify" {
-  interface FastifyTypeProviderDefault {
-    output: this["input"] extends TSchema
-      ? StaticDecode<this["input"]>
-      : unknown;
-  }
-}
-```
