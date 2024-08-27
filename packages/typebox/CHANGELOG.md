@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/joshuaavalon/fastify-plugins/compare/fastify-plugin-typebox-v1.0.0...fastify-plugin-typebox-v1.1.0) (2024-08-27)
+
+
+### Features
+
+* add @joshuaavalon/fastify-plugin-typebox ([a4409fc](https://github.com/joshuaavalon/fastify-plugins/commit/a4409fcbb3dc9d25bf04bf12ebf32a50cbaa1a15))
+
+
+### Bug Fixes
+
+* repository url ([7b0de9b](https://github.com/joshuaavalon/fastify-plugins/commit/7b0de9bc8f89f38fe897499eed38ae2063f8d894))
+
 ## [1.0.0](https://github.com/joshuaavalon/fastify-plugin-typebox/compare/fastify-plugin-typebox-v0.0.1...fastify-plugin-typebox-v1.0.0) (2024-05-13)
 
 
