@@ -1,0 +1,46 @@
+{
+  "name": "@joshuaavalon/fastify-plugin-typebox",
+  "version": "1.0.0",
+  "description": "Typebox plugin for fastify",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc",
+    "test": "set NODE_OPTIONS=--enable-source-maps && mocha",
+    "prepublishOnly": "npm run build"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "homepage": "https://github.com/joshuaavalon/fastify-plugin-plugins#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshuaavalon/fastify-plugin-plugins.git",
+    "directory": "packages/typebox"
+  },
+  "bugs": {
+    "url": "https://github.com/joshuaavalon/fastify-plugin-plugins/issues"
+  },
+  "keywords": [
+    "fastify",
+    "fastify-plugin"
+  ],
+  "files": [
+    "dist",
+    "!dist/**/__tests__/**/*"
+  ],
+  "author": "Joshua Avalon",
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "@sinclair/typebox": "^0.33.7",
+    "fastify": "^4.24.3"
+  },
+  "dependencies": {
+    "fastify-plugin": "^4.5.1"
+  }
+}

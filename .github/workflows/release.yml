@@ -10,6 +10,7 @@ jobs:
     outputs:
       release-prisma: ${{ steps.release.outputs['packages/prisma--release_created'] || false }}
       release-storage: ${{ steps.release.outputs['packages/storage--release_created'] || false }}
+      release-typebox: ${{ steps.release.outputs['packages/typebox--release_created'] || false }}
     permissions:
       contents: write
       pull-requests: write
@@ -28,6 +29,8 @@ jobs:
             is-release: ${{ fromJSON(needs.release-please.outputs.release-prisma) }}
           - name: "@joshuaavalon/fastify-plugin-storage"
             is-release: ${{ fromJSON(needs.release-please.outputs.release-storage) }}
+          - name: "@joshuaavalon/fastify-plugin-typebox"
+            is-release: ${{ fromJSON(needs.release-please.outputs.release-typebox) }}
         exclude:
           - package:
               is-release: false
