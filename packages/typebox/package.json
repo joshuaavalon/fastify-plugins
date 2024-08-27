@@ -17,14 +17,14 @@
       "import": "./dist/index.js"
     }
   },
-  "homepage": "https://github.com/joshuaavalon/fastify-plugin-plugins#readme",
+  "homepage": "https://github.com/joshuaavalon/fastify-plugins#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/joshuaavalon/fastify-plugin-plugins.git",
+    "url": "git+https://github.com/joshuaavalon/fastify-plugins.git",
     "directory": "packages/typebox"
   },
   "bugs": {
-    "url": "https://github.com/joshuaavalon/fastify-plugin-plugins/issues"
+    "url": "https://github.com/joshuaavalon/fastify-plugins/issues"
   },
   "keywords": [
     "fastify",
