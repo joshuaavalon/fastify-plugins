@@ -4,7 +4,7 @@ import jsConfig from "@joshuaavalon/eslint-config-javascript";
 import tsRules from "@joshuaavalon/eslint-config-typescript";
 
 export default [
-  { ignores: ["node_modules", "dist"] },
+  { ignores: ["**/node_modules", "**/dist"] },
   {
     ...jsConfig,
     files: ["**/*.js", "**/*.mjs", "**/*.cjs"],
