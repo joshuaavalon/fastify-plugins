@@ -37,10 +37,10 @@
   "author": "Joshua Avalon",
   "license": "Apache-2.0",
   "peerDependencies": {
-    "fastify": "^4.24.3"
+    "fastify": "^5.1.0"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.629.0",
-    "fastify-plugin": "^4.5.1"
+    "fastify-plugin": "^5.0.1"
   }
 }

@@ -27,7 +27,7 @@ export default fp<StoragePluginOptions>(
   {
     decorators: {},
     dependencies: [],
-    fastify: "4.x",
+    fastify: "5.x",
     name
   }
 );

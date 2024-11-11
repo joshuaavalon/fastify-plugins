@@ -38,9 +38,9 @@
   "license": "Apache-2.0",
   "peerDependencies": {
     "@sinclair/typebox": "^0.33.7",
-    "fastify": "^4.24.3"
+    "fastify": "^5.1.0"
   },
   "dependencies": {
-    "fastify-plugin": "^4.5.1"
+    "fastify-plugin": "^5.0.1"
   }
 }

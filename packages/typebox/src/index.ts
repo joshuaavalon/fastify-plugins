@@ -43,7 +43,7 @@ export default fp<Readonly<Options>>(
   },
   {
     dependencies: [],
-    fastify: "4.x",
+    fastify: "5.x",
     name
   }
 );
@@ -52,6 +52,7 @@ export * from "./error.js";
 
 declare module "fastify" {
   interface FastifyTypeProviderDefault {
-    output: this["input"] extends TSchema ? StaticDecode<this["input"]> : unknown;
+    serializer: this["schema"] extends TSchema ? StaticDecode<this["schema"]> : unknown;
+    validator: this["schema"] extends TSchema ? StaticDecode<this["schema"]> : unknown;
   }
 }
