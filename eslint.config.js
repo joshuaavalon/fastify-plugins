@@ -1,7 +1,7 @@
+import jsConfig from "@joshuaavalon/eslint-config-javascript";
+import tsConfig from "@joshuaavalon/eslint-config-typescript";
 import globals from "globals";
 import typescript from "typescript-eslint";
-import jsConfig from "@joshuaavalon/eslint-config-javascript";
-import tsRules from "@joshuaavalon/eslint-config-typescript";
 
 export default [
   { ignores: ["**/node_modules", "**/dist"] },
@@ -11,12 +11,12 @@ export default [
     languageOptions: { globals: { ...globals.node } }
   },
   {
-    ...tsRules,
+    ...tsConfig,
     files: ["**/*.ts"],
     languageOptions: {
       parser: typescript.parser,
       parserOptions: {
-        project: ["tsconfig.json", "packages/*/tsconfig.json"],
+        projectService: true,
         tsconfigDirName: import.meta.dirname
       }
     }

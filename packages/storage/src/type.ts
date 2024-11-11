@@ -1,19 +1,19 @@
 import type { Readable } from "node:stream";
 
 export interface Storage {
-  write(key: string, input: StorageInput): Promise<void>;
   read(key: string): Promise<StorageOutput>;
   readMetadata(key: string): Promise<StorageMetadataOutput>;
+  write(key: string, input: StorageInput): Promise<void>;
 }
 
 export interface StorageInput {
-  body: Buffer | Readable | Uint8Array | string;
+  body: Buffer | Readable | string | Uint8Array;
   contentType?: string;
 }
 
 export interface StorageMetadataOutput {
-  contentType?: string;
   contentLength?: number;
+  contentType?: string;
   eTag?: string;
   lastModified?: Date;
 }

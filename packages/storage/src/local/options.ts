@@ -1,3 +1,3 @@
-export type LocalStorageOptions = {
+export interface LocalStorageOptions {
   baseDir: string;
-};
+}

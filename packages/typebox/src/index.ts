@@ -1,6 +1,6 @@
 import fp from "fastify-plugin";
-import { validatorCompilerFactory } from "./validator-compiler.js";
 import { serializerCompilerFactory } from "./serializer-compiler.js";
+import { validatorCompilerFactory } from "./validator-compiler.js";
 
 import type { StaticDecode, TSchema } from "@sinclair/typebox";
 
@@ -8,6 +8,13 @@ const name = "@joshuaavalon/fastify-plugin-typebox";
 
 interface Options {
   references?: TSchema[] | undefined;
+
+  /**
+   * Enable serializerCompiler.
+   *
+   * Default to `true`.
+   */
+  serializerCompiler?: boolean;
 
   /**
    * Use `default` in schema.
@@ -22,18 +29,11 @@ interface Options {
    * Default to `true`.
    */
   validatorCompiler?: boolean;
-
-  /**
-   * Enable serializerCompiler.
-   *
-   * Default to `true`.
-   */
-  serializerCompiler?: boolean;
 }
 
 export default fp<Readonly<Options>>(
   async (app, opts) => {
-    const { serializerCompiler = true, validatorCompiler = true, references = [], useDefault = true } = opts;
+    const { references = [], serializerCompiler = true, useDefault = true, validatorCompiler = true } = opts;
     if (validatorCompiler) {
       app.setValidatorCompiler(validatorCompilerFactory({ references, useDefault }));
     }
@@ -42,9 +42,9 @@ export default fp<Readonly<Options>>(
     }
   },
   {
-    name,
+    dependencies: [],
     fastify: "4.x",
-    dependencies: []
+    name
   }
 );
 

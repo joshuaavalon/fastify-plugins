@@ -5,15 +5,15 @@ import {
   S3Client
 } from "@aws-sdk/client-s3";
 
-import type { S3StorageOptions } from "./options.js";
 import type {
   Storage,
   StorageInput,
   StorageMetadataOutput,
   StorageOutput
 } from "../type.js";
+import type { S3StorageOptions } from "./options.js";
 
-export * from "./options.js";
+export type * from "./options.js";
 export class S3Storage implements Storage {
   private readonly client: S3Client;
   private readonly bucket: string;
@@ -25,19 +25,19 @@ export class S3Storage implements Storage {
       this.client = opts.client;
     } else {
       const {
+        accessKey: accessKeyId,
         endpoint,
         region,
-        accessKey: accessKeyId,
         secretKey: secretAccessKey
       } = opts;
       this.client = new S3Client({
-        endpoint,
-        region,
         credentials: {
           accessKeyId,
           secretAccessKey
         },
-        forcePathStyle: true
+        endpoint,
+        forcePathStyle: true,
+        region
       });
     }
   }
@@ -45,10 +45,10 @@ export class S3Storage implements Storage {
   public async write(key: string, input: StorageInput): Promise<void> {
     const { body, contentType } = input;
     const cmd = new PutObjectCommand({
-      Bucket: this.bucket,
-      Key: key,
       Body: body,
-      ContentType: contentType
+      Bucket: this.bucket,
+      ContentType: contentType,
+      Key: key
     });
     await this.client.send(cmd);
   }
@@ -62,8 +62,8 @@ export class S3Storage implements Storage {
     const body = await res.Body?.transformToByteArray() ?? new Uint8Array();
     return {
       body,
-      contentType: res.ContentType,
       contentLength: res.ContentLength,
+      contentType: res.ContentType,
       eTag: res.ETag,
       lastModified: res.LastModified
     };
@@ -76,8 +76,8 @@ export class S3Storage implements Storage {
     });
     const res = await this.client.send(cmd);
     return {
-      contentType: res.ContentType,
       contentLength: res.ContentLength,
+      contentType: res.ContentType,
       eTag: res.ETag,
       lastModified: res.LastModified
     };

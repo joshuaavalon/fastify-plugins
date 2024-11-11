@@ -1,6 +1,6 @@
 import fp from "fastify-plugin";
-import { S3Storage } from "./s3/index.js";
 import { LocalStorage } from "./local/index.js";
+import { S3Storage } from "./s3/index.js";
 
 import type { StoragePluginOptions } from "./options.js";
 import type { Storage } from "./type.js";
@@ -25,10 +25,10 @@ export default fp<StoragePluginOptions>(
     app.decorate("storage", storage);
   },
   {
-    name,
-    fastify: "4.x",
+    decorators: {},
     dependencies: [],
-    decorators: {}
+    fastify: "4.x",
+    name
   }
 );
 

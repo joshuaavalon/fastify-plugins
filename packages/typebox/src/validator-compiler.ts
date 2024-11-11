@@ -1,8 +1,8 @@
 import { Value } from "@sinclair/typebox/value";
 import { ValidationError } from "./error.js";
 
-import type { FastifyInstance, FastifySchemaCompiler } from "fastify";
 import type { TSchema } from "@sinclair/typebox";
+import type { FastifyInstance, FastifySchemaCompiler } from "fastify";
 
 
 export interface ValidatorCompilerFactoryOptions {

@@ -10,7 +10,7 @@ describe("Test @joshuaavalon/fastify-plugin-prisma", async () => {
       const data = await this.db.user.findMany();
       res.send(data);
     });
-    const res = await app.inject({ path: "/test", method: "get" });
+    const res = await app.inject({ method: "get", path: "/test" });
     console.log(res.body);
     assert.deepEqual(res.json(), []);
   });

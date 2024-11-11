@@ -1,16 +1,16 @@
-import { dirname, join } from "node:path";
 import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
 import { eTagOf } from "./etag.js";
 
-import type { LocalStorageOptions } from "./options.js";
 import type {
   Storage,
   StorageInput,
   StorageMetadataOutput,
   StorageOutput
 } from "../type.js";
+import type { LocalStorageOptions } from "./options.js";
 
-export * from "./options.js";
+export type * from "./options.js";
 export class LocalStorage implements Storage {
   private readonly baseDir: string;
 
