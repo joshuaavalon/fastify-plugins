@@ -17,7 +17,13 @@ export interface PrismaPluginOptions {
 
   /**
    * Database queries logging level.
-   * Use boolean to enable or disable all logs.
+   * Use `LogLevel` or `LogLevel[]`.
+   *
+   * `LogLevel` enable logging for log level equal or above.
+   * For example, `LogLevel.warn` logs warn and error.
+   *
+   * `LogLevel[]` enable logging for log level equal.
+   * For example, `[LogLevel.warn]` logs warn only.
    * @defaultValue {@link LogLevel.warn}.
    */
   logLevel?: LogLevels;
