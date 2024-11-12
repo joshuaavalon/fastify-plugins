@@ -1,8 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 import fp from "fastify-plugin";
-
-import type { Prisma } from "@prisma/client";
+import { LogLevel, mapLogLevel } from "./log-level.js";
 import type { Bindings } from "pino";
+import type { LogLevels } from "./log-level.js";
+
+export { LogLevel } from "./log-level.js";
 
 export interface PrismaPluginOptions {
 
@@ -16,9 +18,9 @@ export interface PrismaPluginOptions {
   /**
    * Database queries logging level.
    * Use boolean to enable or disable all logs.
-   * @defaultValue Log `warn` and `error`.
+   * @defaultValue {@link LogLevel.warn}.
    */
-  logLevel?: boolean | Prisma.LogLevel[];
+  logLevel?: LogLevels;
 
   /**
    * Database connection string.
@@ -29,36 +31,43 @@ export interface PrismaPluginOptions {
 
 export const name = "@joshuaavalon/fastify-plugin-prisma";
 
+
 export default fp<PrismaPluginOptions>(
   async (app, opts) => {
-    const { logBindings = { plugin: name }, logLevel = ["warn", "error"], url } = opts;
-    const logLevels: Prisma.LogLevel[] = Array.isArray(logLevel)
-      ? logLevel
-      : logLevel
-        ? ["query", "info", "warn", "error"]
-        : [];
+    const { logBindings = { plugin: name }, logLevel = LogLevel.warn, url } = opts;
+    const logLevels = mapLogLevel(logLevel);
     const db = new PrismaClient({
       datasourceUrl: url,
       log: logLevels.map(level => ({ emit: "event", level }))
     });
     const logger = logBindings ? app.log.child(logBindings) : app.log;
 
-    db.$on("query", event => {
-      const { duration, params, query, target } = event;
-      logger.debug({ duration, params, target }, query);
-    });
-    db.$on("info", event => {
-      const { message, target } = event;
-      logger.info({ target }, message);
-    });
-    db.$on("warn", event => {
-      const { message, target } = event;
-      logger.warn({ target }, message);
-    });
-    db.$on("error", event => {
-      const { message, target } = event;
-      logger.error({ target }, message);
-    });
+    for (const logLevel of logLevels) {
+      if (logLevel === "query") {
+        db.$on("query", event => {
+          const { duration, params, query, target } = event;
+          logger.debug({ duration, params, target }, query);
+        });
+      }
+      if (logLevel === "info") {
+        db.$on("info", event => {
+          const { message, target } = event;
+          logger.info({ target }, message);
+        });
+      }
+      if (logLevel === "warn") {
+        db.$on("warn", event => {
+          const { message, target } = event;
+          logger.warn({ target }, message);
+        });
+      }
+      if (logLevel === "error") {
+        db.$on("error", event => {
+          const { message, target } = event;
+          logger.error({ target }, message);
+        });
+      }
+    }
 
     app.decorate("db", db);
     app.addHook("onClose", async app => {
