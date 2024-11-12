@@ -11,10 +11,28 @@
     "test": "set NODE_OPTIONS=--enable-source-maps && mocha",
     "prepublishOnly": "npm run build"
   },
+  "imports": {
+    "#storage": {
+      "types": "./dist/storage/index.d.ts",
+      "import": "./dist/storage/index.js"
+    },
+    "#storage/*": {
+      "types": "./dist/storage/*/index.d.ts",
+      "import": "./dist/storage/*/index.js"
+    }
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./storage": {
+      "types": "./dist/storage/index.d.ts",
+      "import": "./dist/storage/index.js"
+    },
+    "./storage/*": {
+      "types": "./dist/storage/*/index.d.ts",
+      "import": "./dist/storage/*/index.js"
     }
   },
   "homepage": "https://github.com/joshuaavalon/fastify-plugins#readme",

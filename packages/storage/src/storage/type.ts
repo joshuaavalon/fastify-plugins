@@ -1,4 +1,5 @@
 import type { Readable } from "node:stream";
+import type { FastifyBaseLogger } from "fastify";
 
 export interface Storage {
   read(key: string): Promise<StorageOutput>;
@@ -20,4 +21,8 @@ export interface StorageMetadataOutput {
 
 export interface StorageOutput extends StorageMetadataOutput {
   body: Uint8Array;
+}
+
+export interface StorageOptions {
+  logger: FastifyBaseLogger;
 }
