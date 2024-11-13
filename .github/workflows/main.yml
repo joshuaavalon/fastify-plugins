@@ -27,6 +27,21 @@ jobs:
           - lts/*
           - latest
     steps:
+      - name: Setup minio
+        run: |
+          docker run -d -p 9000:9000 --name minio \
+                     -e "MINIO_ACCESS_KEY=minioadmin" \
+                     -e "MINIO_SECRET_KEY=minioadmin" \
+                     --health-cmd "curl -f http://localhost:9000/minio/health/live" \
+                     quay.io/minio/minio server /data
+      - run: while [ "`docker inspect -f {{.State.Health.Status}} minio`" != "healthy" ]; do sleep 2; done
+        timeout-minutes: 1
+      - name: Fetch mc client
+        run: curl -o ./mc -# https://dl.min.io/client/mc/release/linux-amd64/mc && chmod +x ./mc
+      - name: Create bucket
+        run: ./mc alias set minio http://127.0.0.1:9000 minioadmin minioadmin && ./mc mb minio/bucket
+      - name: Remove mc client
+        run: rm -v ./mc
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
