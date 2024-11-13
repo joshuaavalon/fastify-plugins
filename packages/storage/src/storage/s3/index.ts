@@ -33,7 +33,7 @@ export class S3Storage implements Storage {
       const {
         accessKey: accessKeyId,
         endpoint,
-        region,
+        region = "us-east-1",
         secretKey: secretAccessKey
       } = opts;
       this.client = new S3Client({
