@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/joshuaavalon/fastify-plugins/compare/fastify-plugin-typebox-v1.1.0...fastify-plugin-typebox-v2.0.0) (2024-11-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update to fastify v5
+
+### Features
+
+* Update to fastify v5 ([bcd9d43](https://github.com/joshuaavalon/fastify-plugins/commit/bcd9d43c26ec3403934f05d8bfc723085ca82908))
+
 ## [1.1.0](https://github.com/joshuaavalon/fastify-plugins/compare/fastify-plugin-typebox-v1.0.0...fastify-plugin-typebox-v1.1.0) (2024-08-27)
 
 
