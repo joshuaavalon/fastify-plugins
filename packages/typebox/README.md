@@ -10,6 +10,9 @@ It uses `@sinclair/typebox` to handle validation and serialization.
 npm install @joshuaavalon/fastify-plugin-typebox
 ```
 
+The payload of the request and response (JSON) are considered as encoded type in terms of Typebox transform.
+This means the based types should be JSON type instead internal type.
+
 ```ts
 import fastify from "fastify";
 import fileRoutesPlugin from "@joshuaavalon/fastify-plugin-typebox";
