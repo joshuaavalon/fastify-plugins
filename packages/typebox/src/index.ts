@@ -1,12 +1,20 @@
 import fp from "fastify-plugin";
 import { serializerCompilerFactory } from "./serializer-compiler.js";
 import { validatorCompilerFactory } from "./validator-compiler.js";
-
 import type { StaticDecode, TSchema } from "@sinclair/typebox";
+import type { Bindings } from "pino";
 
 const name = "@joshuaavalon/fastify-plugin-typebox";
 
 export type TypeboxPluginOptions = {
+
+  /**
+   * Log bindings for all logs emitted by this plugin.
+   * Use boolean to enable or disable log bindings.
+   * @defaultValue { plugin: {@link name} }
+   */
+  logBindings?: Bindings | false;
+
   references?: TSchema[] | undefined;
 
   /**
@@ -33,12 +41,19 @@ export type TypeboxPluginOptions = {
 
 export default fp<TypeboxPluginOptions>(
   async (app, opts) => {
-    const { references = [], serializerCompiler = true, useDefault = true, validatorCompiler = true } = opts;
+    const {
+      logBindings = { plugin: name },
+      references = [],
+      serializerCompiler = true,
+      useDefault = true,
+      validatorCompiler = true
+    } = opts;
+    const logger = logBindings ? app.log.child(logBindings) : app.log;
     if (validatorCompiler) {
-      app.setValidatorCompiler(validatorCompilerFactory({ references, useDefault }));
+      app.setValidatorCompiler(validatorCompilerFactory({ logger, references, useDefault }));
     }
     if (serializerCompiler) {
-      app.setSerializerCompiler(serializerCompilerFactory({ references, useDefault }));
+      app.setSerializerCompiler(serializerCompilerFactory({ logger, references, useDefault }));
     }
   },
   {
