@@ -15,10 +15,10 @@ This means the based types should be JSON type instead internal type.
 
 ```ts
 import fastify from "fastify";
-import fileRoutesPlugin from "@joshuaavalon/fastify-plugin-typebox";
+import typeboxPlugin from "@joshuaavalon/fastify-plugin-typebox";
 
 const app = await fastify();
-await app.register(plugin);
+await app.register(typeboxPlugin);
 app.post(
   "/",
   {
