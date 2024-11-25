@@ -37,7 +37,7 @@
   "author": "Joshua Avalon",
   "license": "Apache-2.0",
   "peerDependencies": {
-    "@sinclair/typebox": "^0.33.7",
+    "@sinclair/typebox": "^0.34.8",
     "fastify": "^5.1.0"
   },
   "dependencies": {
