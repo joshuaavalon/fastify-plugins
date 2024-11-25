@@ -5,7 +5,7 @@ import plugin from "../index.js";
 
 import type { FastifyInstance } from "fastify";
 
-describe("Test plugin", () => {
+describe("Test @joshuaavalon/fastify-plugin-typebox", () => {
   let app: FastifyInstance;
 
   before(async () => {
