@@ -5,7 +5,7 @@ import type { CreateStorageOptions, FastifyStorage } from "#storage";
 
 export type { CreateStorageOptions, FastifyStorage, Storage, StorageOptions } from "#storage";
 
-export interface StoragePluginOptions {
+export type StoragePluginOptions = {
 
   /*
    * Log bindings for all logs emitted by this plugin.
@@ -15,7 +15,7 @@ export interface StoragePluginOptions {
   logBindings?: Bindings | false;
 
   storage: CreateStorageOptions;
-}
+};
 
 export const name = "@joshuaavalon/fastify-plugin-storage";
 

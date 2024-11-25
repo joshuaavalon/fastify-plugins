@@ -6,7 +6,7 @@ import type { StaticDecode, TSchema } from "@sinclair/typebox";
 
 const name = "@joshuaavalon/fastify-plugin-typebox";
 
-interface Options {
+export type TypeboxPluginOptions = {
   references?: TSchema[] | undefined;
 
   /**
@@ -29,9 +29,9 @@ interface Options {
    * Default to `true`.
    */
   validatorCompiler?: boolean;
-}
+};
 
-export default fp<Readonly<Options>>(
+export default fp<TypeboxPluginOptions>(
   async (app, opts) => {
     const { references = [], serializerCompiler = true, useDefault = true, validatorCompiler = true } = opts;
     if (validatorCompiler) {

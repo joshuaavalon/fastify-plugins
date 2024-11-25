@@ -6,7 +6,7 @@ import type { LogLevels } from "./log-level.js";
 
 export { LogLevel } from "./log-level.js";
 
-export interface PrismaPluginOptions {
+export type PrismaPluginOptions = {
 
   /**
    * Log bindings for all logs emitted by this plugin.
@@ -33,7 +33,7 @@ export interface PrismaPluginOptions {
    * @defaultValue `url` in generated client.
    */
   url?: string;
-}
+};
 
 export const name = "@joshuaavalon/fastify-plugin-prisma";
 
