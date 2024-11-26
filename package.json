@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/joshuaavalon/fastify-plugins#readme",
   "devDependencies": {
-    "@joshuaavalon/eslint-config-typescript": "^9.1.1",
+    "@joshuaavalon/eslint-config-typescript": "^9.2.0",
     "@types/chai": "^5.0.1",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.9.3",
