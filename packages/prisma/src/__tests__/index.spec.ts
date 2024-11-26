@@ -11,7 +11,6 @@ describe("Test @joshuaavalon/fastify-plugin-prisma", async () => {
       res.send(data);
     });
     const res = await app.inject({ method: "get", path: "/test" });
-    console.log(res.body);
     assert.deepEqual(res.json(), []);
   });
 });
