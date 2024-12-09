@@ -41,10 +41,10 @@
   "author": "Joshua Avalon",
   "license": "Apache-2.0",
   "devDependencies": {
-    "prisma": "^5.22.0"
+    "prisma": "^6.0.1"
   },
   "peerDependencies": {
-    "@prisma/client": "^5.22.0",
+    "@prisma/client": "^6.0.1",
     "fastify": "^5.1.0"
   },
   "dependencies": {
