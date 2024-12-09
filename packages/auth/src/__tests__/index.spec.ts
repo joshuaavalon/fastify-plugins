@@ -88,8 +88,8 @@ describe("Test @joshuaavalon/fastify-plugin-auth", async () => {
     assert.isTrue(success);
     const cookies = parseSetCookie(res.headers["set-cookie"] ?? [], { map: true });
     const res2 = await app.inject({
-      cookies: Object.assign({}, ...Object.entries(cookies).map(([key, value]) => [key, value.value])),
-      method: "post",
+      cookies: Object.assign({}, ...Object.entries(cookies).map(([key, value]) => ({ [key]: value.value }))),
+      method: "get",
       path: "/me"
     });
     const { name } = res2.json();
