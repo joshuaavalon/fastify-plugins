@@ -35,7 +35,7 @@ export default fp<CommonPluginOptions>(
 );
 
 declare module "fastify" {
-  export interface FastifyInstance {
+  interface FastifyInstance {
     fastifyOptions: FastifyOptions;
   }
 }
