@@ -1,0 +1,74 @@
+{
+  "name": "@joshuaavalon/fastify-plugin-auth",
+  "version": "1.0.0",
+  "description": "Auth plugin for fastify",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc",
+    "test": "set NODE_OPTIONS=--enable-source-maps && mocha",
+    "prepublishOnly": "npm run build"
+  },
+  "imports": {
+    "#func/tests": {
+      "types": "./dist/func/__tests__/index.d.ts",
+      "import": "./dist/func/__tests__/index.js"
+    },
+    "#error": {
+      "types": "./dist/error/index.d.ts",
+      "import": "./dist/error/index.js"
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./func": {
+      "types": "./dist/func/index.d.ts",
+      "import": "./dist/func/index.js"
+    },
+    "./error": {
+      "types": "./dist/error/index.d.ts",
+      "import": "./dist/error/index.js"
+    }
+  },
+  "homepage": "https://github.com/joshuaavalon/fastify-plugins#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshuaavalon/fastify-plugins.git",
+    "directory": "packages/auth"
+  },
+  "bugs": {
+    "url": "https://github.com/joshuaavalon/fastify-plugins/issues"
+  },
+  "keywords": [
+    "fastify",
+    "fastify-plugin"
+  ],
+  "files": [
+    "dist",
+    "!dist/**/__tests__/**/*"
+  ],
+  "author": "Joshua Avalon",
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "@fastify/cookie": "^11.0.1",
+    "@fastify/secure-session": "^8.1.0",
+    "fastify": "^5.1.0"
+  },
+  "dependencies": {
+    "@casl/ability": "^6.7.2",
+    "@types/luxon": "^3.4.2",
+    "fastify-plugin": "^5.0.1",
+    "luxon": "^3.5.0",
+    "sodium-native": "^4.3.1"
+  },
+  "devDependencies": {
+    "@types/set-cookie-parser": "^2.4.10",
+    "@types/sodium-native": "^2.3.9",
+    "set-cookie-parser": "^2.7.1"
+  }
+}
