@@ -51,7 +51,6 @@ export default fp<AuthPluginOptions>(
   },
   {
     decorators: { request: ["session", "refreshSession"] },
-    dependencies: ["@fastify/cookie", "@fastify/session"],
     fastify: "5.x",
     name
   }
