@@ -48,10 +48,10 @@ export class AuthContext {
     this.user = user;
   }
 
-  public authenticate(user: AuthUser, opts: CreateUserTokenOptions = this.opts.defaultCreateUserTokenOptions): void {
+  public async authenticate(user: AuthUser, opts: CreateUserTokenOptions = this.opts.defaultCreateUserTokenOptions): Promise<void> {
     this.setUser(user);
-    this.setRefreshToken(opts);
-    this.setAccessToken();
+    await this.setRefreshToken(opts);
+    await this.setAccessToken();
   }
 
   public async getAbility(): Promise<AuthContextConfig["ability"]> {

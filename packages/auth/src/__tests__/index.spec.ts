@@ -48,7 +48,7 @@ describe("Test @joshuaavalon/fastify-plugin-auth", async () => {
       async (req, res) => {
         const { password } = req.body as { password: string };
         if (password === "password") {
-          req.auth.authenticate({ name: "name" });
+          await req.auth.authenticate({ name: "name" });
           res.send({ success: true });
         } else {
           res.send({ success: false });
