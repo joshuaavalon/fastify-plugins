@@ -1,5 +1,6 @@
 {
   "packages/auth": "1.0.0",
+  "packages/common": "1.0.0",
   "packages/prisma": "1.1.1",
   "packages/storage": "2.1.1",
   "packages/typebox": "1.1.0"
