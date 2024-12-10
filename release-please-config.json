@@ -7,6 +7,7 @@
     }
   ],
   "packages": {
+    "packages/auth": {},
     "packages/prisma": {},
     "packages/storage": {},
     "packages/typebox": {}
