@@ -16,6 +16,10 @@
       "types": "./dist/func/__tests__/index.d.ts",
       "import": "./dist/func/__tests__/index.js"
     },
+    "#init-plugins": {
+      "types": "./dist/init-plugins/index.d.ts",
+      "import": "./dist/init-plugins/index.js"
+    },
     "#error": {
       "types": "./dist/error/index.d.ts",
       "import": "./dist/error/index.js"

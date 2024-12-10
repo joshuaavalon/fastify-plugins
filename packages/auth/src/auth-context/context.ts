@@ -15,6 +15,7 @@ export interface CreateUserTokenOptions {
 export type AuthContextOptions = {
   createAbility: (user: AuthUser | null) => Promise<AuthContextConfig["ability"]>;
   createUserToken: (app: FastifyInstance, user: AuthUser, opts: CreateUserTokenOptions) => Promise<string>;
+  defaultCreateUserTokenOptions: CreateUserTokenOptions;
   findUser: (app: FastifyInstance, userToken: string) => Promise<AuthUser | null>;
 };
 
@@ -47,12 +48,23 @@ export class AuthContext {
     this.user = user;
   }
 
+  public authenticate(user: AuthUser, opts: CreateUserTokenOptions = this.opts.defaultCreateUserTokenOptions): void {
+    this.setUser(user);
+    this.setRefreshToken(opts);
+    this.setAccessToken();
+  }
+
   public async getAbility(): Promise<AuthContextConfig["ability"]> {
     const user = await this.getUser();
     return await this.opts.createAbility(user);
   }
 
-  public async setRefreshToken(opts: CreateUserTokenOptions): Promise<void> {
+  /**
+   * Create and set `userToken` to `refreshSession`.
+   *
+   * Throws {@link MissingUserError} if user does not exist.
+   */
+  public async setRefreshToken(opts: CreateUserTokenOptions = this.opts.defaultCreateUserTokenOptions): Promise<void> {
     const user = await this.getUser();
     if (!user) {
       throw new MissingUserError();
@@ -61,6 +73,11 @@ export class AuthContext {
     this.req.refreshSession.set("userToken", userToken);
   }
 
+  /**
+   * Set `userToken` to `session`.
+   *
+   * Throws {@link MissingRefreshTokenError} if userToken does not exist on `refreshSession`.
+   */
   public async setAccessToken(): Promise<void> {
     const req = this.req;
     const userToken = req.refreshSession.userToken;

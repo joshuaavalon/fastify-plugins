@@ -1,9 +1,11 @@
 import fp from "fastify-plugin";
+import { initPlugins } from "#init-plugins";
 import { addAuthContext } from "./auth-context/index.js";
 import type { RefreshSessionData, Session } from "@fastify/secure-session";
 import type { FastifyInstance } from "fastify";
-import type { DateTime, Duration } from "luxon";
+import type { DateTime } from "luxon";
 import type { Bindings } from "pino";
+import type { InitPluginsOptions } from "#init-plugins";
 import type { AuthContext, AuthContextOptions, AuthUser } from "./auth-context/index.js";
 
 export type { AuthContextConfig } from "./auth-context/index.js";
@@ -21,12 +23,7 @@ export type RefreshTokenOptions = {
 };
 
 export type AuthPluginOptions = {
-  /**
-   * It should be shorter than refresh token expire duration.
-   *
-   * Default to 5 minutes.
-   */
-  accessTokenExpiration?: Duration;
+  authContext: AuthContextOptions;
 
   /**
    * Log bindings for all logs emitted by this plugin.
@@ -34,23 +31,16 @@ export type AuthPluginOptions = {
    * @defaultValue { plugin: {@link name} }
    */
   logBindings?: Bindings | false;
-
-  /**
-   * If it is set to `null`, it will never expire.
-   *
-   * Default to 30 days.
-   */
-  refreshTokenExpiration?: Duration | null;
-} & AuthContextOptions;
+} & InitPluginsOptions;
 
 export default fp<AuthPluginOptions>(
   async (app, opts) => {
-    const { createAbility, createUserToken, findUser, logBindings = { plugin: name } } = opts;
+    const { authContext, initCookieOpts, initSessionOpts, logBindings = { plugin: name } } = opts;
     const logger = logBindings ? app.log.child(logBindings) : app.log;
-    addAuthContext(app, { authContext: { createAbility, createUserToken, findUser }, logger });
+    await initPlugins(app, { initCookieOpts, initSessionOpts });
+    addAuthContext(app, { authContext, logger });
   },
   {
-    decorators: { request: ["session", "refreshSession"] },
     fastify: "5.x",
     name
   }

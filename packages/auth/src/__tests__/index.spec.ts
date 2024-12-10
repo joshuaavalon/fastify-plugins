@@ -1,6 +1,4 @@
 import { AbilityBuilder, createMongoAbility } from "@casl/ability";
-import cookiePlugin from "@fastify/cookie";
-import sessionPlugin from "@fastify/secure-session";
 import { assert } from "chai";
 import fastify from "fastify";
 import parseSetCookie from "set-cookie-parser";
@@ -17,45 +15,26 @@ describe("Test @joshuaavalon/fastify-plugin-auth", async () => {
 
   before(async () => {
     app = await fastify({ });
-    await app.register(cookiePlugin);
-    await app.register(sessionPlugin, [{
-      cookie: {
-        httpOnly: true,
-        maxAge: 2592000,
-        path: "/",
-        sameSite: "strict",
-        secure: "auto"
-      },
-      expiry: 2592000,
-      salt,
-      secret,
-      sessionName: "refreshSession"
-    }, {
-      cookie: {
-        httpOnly: true,
-        maxAge: 300,
-        path: "/",
-        sameSite: "strict",
-        secure: "auto"
-      },
-      expiry: 300,
-      salt,
-      secret,
-      sessionName: "session"
-    }]);
     await app.register(plugin, {
-      async createAbility() {
-        const createAppAbility = createMongoAbility as CreateAbility<AppAbility>;
-        const builder = new AbilityBuilder(createAppAbility);
-        return builder.build();
+      authContext: {
+        async createAbility() {
+          const createAppAbility = createMongoAbility as CreateAbility<AppAbility>;
+          const builder = new AbilityBuilder(createAppAbility);
+          return builder.build();
+        },
+        async createUserToken() {
+          return "userToken";
+        },
+        defaultCreateUserTokenOptions: {},
+        async findUser() {
+          return { name: "name" };
+        }
       },
-      async createUserToken() {
-        return "userToken";
-      },
-      async findUser() {
-        return { name: "name" };
+      initCookieOpts: true,
+      initSessionOpts: {
+        refreshSession: { salt, secret },
+        session: { salt, secret }
       }
-
     });
     app.get(
       "/me",
@@ -69,11 +48,11 @@ describe("Test @joshuaavalon/fastify-plugin-auth", async () => {
       async (req, res) => {
         const { password } = req.body as { password: string };
         if (password === "password") {
-          req.auth.setUser({ name: "name" });
+          req.auth.authenticate({ name: "name" });
+          res.send({ success: true });
+        } else {
+          res.send({ success: false });
         }
-        await req.auth.setRefreshToken({});
-        await req.auth.setAccessToken();
-        res.send({ success: true });
       }
     );
   });
