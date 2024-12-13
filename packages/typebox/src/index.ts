@@ -18,25 +18,11 @@ export type TypeboxPluginOptions = {
   references?: TSchema[] | undefined;
 
   /**
-   * Enable serializerCompiler.
-   *
-   * Default to `true`.
-   */
-  serializerCompiler?: boolean;
-
-  /**
    * Use `default` in schema.
    *
    * Default to `true`.
    */
   useDefault?: boolean;
-
-  /**
-   * Enable validatorCompiler.
-   *
-   * Default to `true`.
-   */
-  validatorCompiler?: boolean;
 };
 
 export default fp<TypeboxPluginOptions>(
@@ -44,17 +30,11 @@ export default fp<TypeboxPluginOptions>(
     const {
       logBindings = { plugin: name },
       references = [],
-      serializerCompiler = true,
-      useDefault = true,
-      validatorCompiler = true
+      useDefault = true
     } = opts;
     const logger = logBindings ? app.log.child(logBindings) : app.log;
-    if (validatorCompiler) {
-      app.setValidatorCompiler(validatorCompilerFactory({ logger, references, useDefault }));
-    }
-    if (serializerCompiler) {
-      app.setSerializerCompiler(serializerCompilerFactory({ logger, references, useDefault }));
-    }
+    app.setValidatorCompiler(validatorCompilerFactory({ logger, references, useDefault }));
+    app.setSerializerCompiler(serializerCompilerFactory({ logger, references, useDefault }));
   },
   {
     dependencies: [],
