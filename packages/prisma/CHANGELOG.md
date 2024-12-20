@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.0.0](https://github.com/joshuaavalon/fastify-plugins/compare/fastify-plugin-prisma-v1.1.1...fastify-plugin-prisma-v2.0.0) (2024-12-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update to fastify v5
+
+### Features
+
+* Update to fastify v5 ([bcd9d43](https://github.com/joshuaavalon/fastify-plugins/commit/bcd9d43c26ec3403934f05d8bfc723085ca82908))
+
+
+### Bug Fixes
+
+* **prisma:** Improve log level handling ([80e9746](https://github.com/joshuaavalon/fastify-plugins/commit/80e974615737ae9c068335c3e5ad26cae8a56e2c))
+* Remove console.log ([8271b19](https://github.com/joshuaavalon/fastify-plugins/commit/8271b19ecab98a925f641563ac0240a744e653b7))
+* Update options definition ([da44b0d](https://github.com/joshuaavalon/fastify-plugins/commit/da44b0d9b0f5280da5cce047199dea82a7b418fb))
+* Update to prisma v6.0.1 ([11df4f5](https://github.com/joshuaavalon/fastify-plugins/commit/11df4f5b620f277bdbac6f3195050982795252ea))
+
 ## [1.1.1](https://github.com/joshuaavalon/fastify-plugins/compare/fastify-plugin-prisma-v1.1.0...fastify-plugin-prisma-v1.1.1) (2024-08-16)
 
 
