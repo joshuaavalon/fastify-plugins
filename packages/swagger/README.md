@@ -1,5 +1,7 @@
 # @joshuaavalon/fastify-plugin-swagger
 
+It uses [@fastify/swagger] for generating OpenAPI 3.0 JSON and [@scalar/fastify-api-reference] for the web interface.
+
 ## Getting Started
 
 > This is a ESM only module. You must be using ESM in order to use this.
@@ -23,3 +25,6 @@ await app.register(swaggerPlugin, {
   routePrefix: "/api"
 });
 ```
+
+[@fastify/swagger]: https://github.com/fastify/fastify-swagger
+[@scalar/fastify-api-reference]: https://github.com/scalar/scalar/tree/main/packages/fastify-api-reference

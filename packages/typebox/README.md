@@ -1,6 +1,6 @@
 # @joshuaavalon/fastify-plugin-typebox
 
-It uses @sinclair/typebox to handle validation and serialization.
+It uses [@sinclair/typebox] to handle validation and serialization.
 It adds support via [validatorCompiler] and [serializerCompiler].
 
 Since [@sinclair/typebox] provides type-safe JSON schema, this plugin allows type-safe in request and response payload.

@@ -17,3 +17,5 @@ await fastify.register(prismaPlugin, opts);
 
 const user = await fastify.db.user.findFirst();
 ```
+
+## Options
