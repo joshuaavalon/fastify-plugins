@@ -6,7 +6,12 @@ import type { Bindings } from "pino";
 const name = "@joshuaavalon/fastify-plugin-swagger";
 
 export type SwaggerPluginOptions = {
+  /**
+   * Open all tags in scalar instead of relevant tag.
+   * @defaultValue true
+   */
   defaultOpenAllTags?: boolean;
+
   description: string;
 
   /**
