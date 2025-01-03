@@ -1,7 +1,7 @@
 {
-  "packages/auth": "1.0.0",
-  "packages/common": "1.0.0",
+  "packages/auth": "0.0.0",
   "packages/prisma": "1.1.1",
   "packages/storage": "2.1.1",
+  "packages/swagger": "0.0.0",
   "packages/typebox": "1.1.0"
 }

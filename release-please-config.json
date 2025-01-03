@@ -8,9 +8,9 @@
   ],
   "packages": {
     "packages/auth": {},
-    "packages/common": {},
     "packages/prisma": {},
     "packages/storage": {},
+    "packages/swagger": {},
     "packages/typebox": {}
   }
 }

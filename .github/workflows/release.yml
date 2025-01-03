@@ -8,8 +8,10 @@ jobs:
     name: release-please
     runs-on: ubuntu-latest
     outputs:
+      release-auth: ${{ steps.release.outputs['packages/auth--release_created'] || false }}
       release-prisma: ${{ steps.release.outputs['packages/prisma--release_created'] || false }}
       release-storage: ${{ steps.release.outputs['packages/storage--release_created'] || false }}
+      release-swagger: ${{ steps.release.outputs['packages/storage--release_created'] || false }}
       release-typebox: ${{ steps.release.outputs['packages/typebox--release_created'] || false }}
     permissions:
       contents: write
@@ -25,10 +27,14 @@ jobs:
     strategy:
       matrix:
         package:
+          - name: "@joshuaavalon/fastify-plugin-auth"
+            is-release: ${{ fromJSON(needs.release-please.outputs.release-auth) }}
           - name: "@joshuaavalon/fastify-plugin-prisma"
             is-release: ${{ fromJSON(needs.release-please.outputs.release-prisma) }}
           - name: "@joshuaavalon/fastify-plugin-storage"
             is-release: ${{ fromJSON(needs.release-please.outputs.release-storage) }}
+          - name: "@joshuaavalon/fastify-plugin-swagger"
+            is-release: ${{ fromJSON(needs.release-please.outputs.release-swagger) }}
           - name: "@joshuaavalon/fastify-plugin-typebox"
             is-release: ${{ fromJSON(needs.release-please.outputs.release-typebox) }}
         exclude:
