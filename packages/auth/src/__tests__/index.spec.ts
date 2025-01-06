@@ -75,7 +75,7 @@ describe("Test @joshuaavalon/fastify-plugin-auth", async () => {
     assert.equal(name, "name");
   });
 
-  await import("#func/tests");
+  await import("#password/tests");
 });
 
 

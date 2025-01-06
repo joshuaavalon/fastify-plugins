@@ -63,3 +63,12 @@ await app.register(plugin, {
   }
 });
 ```
+
+### Usage
+
+```ts
+import {
+  hashPassword,
+  verifyPassword
+} from "@joshuaavalon/fastify-plugin-auth/func";
+```

@@ -12,10 +12,6 @@
     "prepublishOnly": "npm run build"
   },
   "imports": {
-    "#func/tests": {
-      "types": "./dist/func/__tests__/index.d.ts",
-      "import": "./dist/func/__tests__/index.js"
-    },
     "#init-plugins": {
       "types": "./dist/init-plugins/index.d.ts",
       "import": "./dist/init-plugins/index.js"
@@ -23,16 +19,20 @@
     "#error": {
       "types": "./dist/error/index.d.ts",
       "import": "./dist/error/index.js"
+    },
+    "#password": {
+      "types": "./dist/password/index.d.ts",
+      "import": "./dist/password/index.js"
+    },
+    "#password/tests": {
+      "types": "./dist/password/__tests__/index.d.ts",
+      "import": "./dist/password/__tests__/index.js"
     }
   },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    },
-    "./func": {
-      "types": "./dist/func/index.d.ts",
-      "import": "./dist/func/index.js"
     },
     "./error": {
       "types": "./dist/error/index.d.ts",
@@ -64,7 +64,7 @@
     "fastify": "^5.1.0"
   },
   "dependencies": {
-    "@casl/ability": "^6.7.2",
+    "@casl/ability": "^6.7.3",
     "@types/luxon": "^3.4.2",
     "fastify-plugin": "^5.0.1",
     "luxon": "^3.5.0",
