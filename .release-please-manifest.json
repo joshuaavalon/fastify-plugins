@@ -1,5 +1,5 @@
 {
-  "packages/auth": "1.0.0",
+  "packages/auth": "0.0.0",
   "packages/prisma": "2.0.0",
   "packages/storage": "3.0.0",
   "packages/swagger": "1.0.0",
