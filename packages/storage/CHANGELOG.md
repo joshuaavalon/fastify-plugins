@@ -1,5 +1,22 @@
 # Changelog
 
+## [3.0.0](https://github.com/joshuaavalon/fastify-plugins/compare/fastify-plugin-storage-v2.1.1...fastify-plugin-storage-v3.0.0) (2025-01-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update to fastify v5
+
+### Features
+
+* Add logging ([cc4cfa3](https://github.com/joshuaavalon/fastify-plugins/commit/cc4cfa33f2087e8c0a00f86cd9ca23b07ea41a32))
+* Update to fastify v5 ([bcd9d43](https://github.com/joshuaavalon/fastify-plugins/commit/bcd9d43c26ec3403934f05d8bfc723085ca82908))
+
+
+### Bug Fixes
+
+* Update options definition ([da44b0d](https://github.com/joshuaavalon/fastify-plugins/commit/da44b0d9b0f5280da5cce047199dea82a7b418fb))
+
 ## [2.1.1](https://github.com/joshuaavalon/fastify-plugins/compare/fastify-plugin-storage-v2.1.0...fastify-plugin-storage-v2.1.1) (2024-08-16)
 
 

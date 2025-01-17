@@ -1,6 +1,6 @@
 {
   "name": "@joshuaavalon/fastify-plugin-prisma",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "description": "Prisma plugin for fastify",
   "type": "module",
   "types": "./dist/index.d.ts",
