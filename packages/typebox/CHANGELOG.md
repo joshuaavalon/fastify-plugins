@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.0.0](https://github.com/joshuaavalon/fastify-plugins/compare/fastify-plugin-typebox-v1.1.0...fastify-plugin-typebox-v2.0.0) (2025-01-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update to fastify v5
+
+### Features
+
+* Add logBindings support ([2446b6f](https://github.com/joshuaavalon/fastify-plugins/commit/2446b6f16497ddacb4a8d3fd297e2af50111bc59))
+* Update to fastify v5 ([bcd9d43](https://github.com/joshuaavalon/fastify-plugins/commit/bcd9d43c26ec3403934f05d8bfc723085ca82908))
+
+
+### Bug Fixes
+
+* Remove disable options ([3c601b5](https://github.com/joshuaavalon/fastify-plugins/commit/3c601b5da1bbd96a7010ac64e67cfec7f540d6a6))
+* Update dependencies ([7b8066f](https://github.com/joshuaavalon/fastify-plugins/commit/7b8066f93ba3d55eeb0b03e0d7aefa2e8a0d3690))
+* Update options definition ([da44b0d](https://github.com/joshuaavalon/fastify-plugins/commit/da44b0d9b0f5280da5cce047199dea82a7b418fb))
+
 ## [1.1.0](https://github.com/joshuaavalon/fastify-plugins/compare/fastify-plugin-typebox-v1.0.0...fastify-plugin-typebox-v1.1.0) (2024-08-27)
 
 
