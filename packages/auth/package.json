@@ -1,6 +1,6 @@
 {
   "name": "@joshuaavalon/fastify-plugin-auth",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Auth plugin for fastify",
   "type": "module",
   "types": "./dist/index.d.ts",
